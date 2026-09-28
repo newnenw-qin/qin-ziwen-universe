@@ -1,0 +1,117 @@
+@import "tailwindcss";
+
+:root {
+  --void: #05060a;
+  --ink: #e8e6df;
+  --mute: #8d8b86;
+  --gold: #c4a574;
+  --violet: #7a6b8a;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  background: var(--void);
+  color: var(--ink);
+  min-height: 100%;
+  cursor: none;
+}
+
+body {
+  overflow: hidden;
+}
+
+::selection {
+  background: rgba(196, 165, 116, 0.28);
+  color: #fff;
+}
+
+a,
+button {
+  cursor: none;
+}
+
+.font-display {
+  font-family: var(--font-display), "Times New Roman", serif;
+}
+
+.font-ui {
+  font-family: var(--font-ui), system-ui, sans-serif;
+}
+
+.font-cn {
+  font-family: var(--font-cn), "Songti SC", serif;
+}
+
+.noise {
+  pointer-events: none;
+  position: fixed;
+  inset: 0;
+  z-index: 40;
+  opacity: 0.045;
+  mix-blend-mode: overlay;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+.planet {
+  border-radius: 50%;
+  position: relative;
+  isolation: isolate;
+}
+
+.planet::before {
+  content: "";
+  position: absolute;
+  inset: -18%;
+  border-radius: 50%;
+  border: 1px solid rgba(232, 230, 223, 0.08);
+  opacity: 0;
+  transform: scale(0.92);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+
+.planet::after {
+  content: "";
+  position: absolute;
+  inset: 12%;
+  border-radius: 50%;
+  background: radial-gradient(circle at 32% 28%, rgba(255, 255, 255, 0.28), transparent 42%);
+  mix-blend-mode: screen;
+}
+
+.planet.is-hot::before {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.metric {
+  font-variant-numeric: lining-nums;
+}
+
+@keyframes pulse {
+  0%,
+  100% {
+    opacity: 0.12;
+    transform: scale(1);
+  }
+  50% {
+    opacity: 0.55;
+    transform: scale(1.6);
+  }
+}
+
+@media (max-width: 900px) {
+  body {
+    overflow: auto;
+    cursor: auto;
+  }
+
+  a,
+  button {
+    cursor: pointer;
+  }
+}
